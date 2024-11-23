@@ -1,0 +1,12 @@
+# Diretório do Terraform
+.terraform/
+
+# Arquivo de estado
+terraform.tfstate
+terraform.tfstate.backup
+
+# Logs de execução
+crash.log
+
+# Arquivos com variáveis sensíveis
+*.tfvars
