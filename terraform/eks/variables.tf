@@ -21,7 +21,3 @@ variable "max_size" {
 variable "min_size" {
   type = number
 }
-
-variable "create_snapshot" {
-  type = bool
-}
