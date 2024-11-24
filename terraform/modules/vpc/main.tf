@@ -1,5 +1,5 @@
 resource "aws_vpc" "new-vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.vpc_cidr_block
   tags = {
     Name = "${var.prefix}-nova-vpc"
   }
@@ -51,16 +51,4 @@ resource "aws_route_table_association" "new-rt-association" {
   route_table_id = aws_route_table.new-rt.id
   subnet_id      = aws_subnet.subnets.*.id[count.index]
 }
-
-
-output "vpc_id" {
-  value       = aws_vpc.new-vpc.id
-  description = "ID da VPC criada"
-}
-
-output "private_subnet_ids" {
-  value       = aws_subnet.subnets[*].id
-  description = "IDs das subnets privadas"
-}
-
 

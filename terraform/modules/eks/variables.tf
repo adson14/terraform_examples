@@ -22,6 +22,10 @@ variable "min_size" {
   type = number
 }
 
-variable "create_snapshot" {
-  type = bool
+variable "vpc_id" {
+  type = string
+}
+
+variable "private_subnet_ids" {
+  type = list(any)
 }

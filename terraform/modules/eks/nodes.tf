@@ -33,7 +33,7 @@ resource "aws_eks_node_group" "node-1" {
   cluster_name    = aws_eks_cluster.cluster.name
   node_group_name = "${var.prefix}-${var.cluster_name}-node-group"
   node_role_arn   = aws_iam_role.node.arn
-  subnet_ids      = data.terraform_remote_state.vpc.outputs.private_subnet_ids
+  subnet_ids      = var.private_subnet_ids
   instance_types  = ["t2.micro"]
   capacity_type   = "ON_DEMAND"
   disk_size       = 20

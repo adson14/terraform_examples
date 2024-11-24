@@ -1,22 +1,6 @@
 
-# module "vpc" {
-#   source = "../vpc" # Caminho para o diretório do módulo vpc
-#   prefix = var.prefix
-# }
-
-data "terraform_remote_state" "vpc" {
-  backend = "s3"
-
-  config = {
-    bucket = "adson-treinamento-terraform" # Nome do bucket S3
-    key    = "vpc/terraform.tfstate"       # Caminho do tfstate da VPC
-    region = "us-east-1"                   # Região do bucket
-  }
-}
-
-
 resource "aws_security_group" "sg" {
-  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+  vpc_id = var.vpc_id
 
   egress = [{
     from_port        = 0
@@ -77,7 +61,7 @@ resource "aws_eks_cluster" "cluster" {
   enabled_cluster_log_types = ["api", "audit"]
 
   vpc_config {
-    subnet_ids = data.terraform_remote_state.vpc.outputs.private_subnet_ids
+    subnet_ids = var.private_subnet_ids
 
     security_group_ids = [
       aws_security_group.sg.id,

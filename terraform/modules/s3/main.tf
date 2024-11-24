@@ -25,23 +25,23 @@ resource "aws_s3_bucket" "static_site_bucket" {
 
 resource "aws_s3_object" "index_html" {
   bucket       = aws_s3_bucket.static_site_bucket.bucket
-  key          = "index.html"                       # Nome do arquivo no bucket
-  source       = "../../static/index.html"          # Caminho local para o arquivo
-  content_type = "text/html"                        # Tipo de conteúdo
-  etag         = filemd5("../../static/index.html") # Calcula o hash do arquivo
+  key          = "index.html"                                # Nome do arquivo no bucket
+  source       = "${path.module}/static/index.html"          # Caminho local para o arquivo
+  content_type = "text/html"                                 # Tipo de conteúdo
+  etag         = filemd5("${path.module}/static/index.html") # Calcula o hash do arquivo
 }
 
 resource "aws_s3_object" "error_html" {
   bucket       = aws_s3_bucket.static_site_bucket.bucket
   key          = "404.html"
-  source       = "../../static/404.html"
+  source       = "${path.module}/static/404.html"
   content_type = "text/html"
-  etag         = filemd5("../../static/404.html") # Calcula o hash do arquivo
+  etag         = filemd5("${path.module}/static/404.html") # Calcula o hash do arquivo
 }
 
 resource "null_resource" "upload_site" {
   provisioner "local-exec" {
-    command = "aws s3 sync ../../static s3://${aws_s3_bucket.static_site_bucket.bucket} --delete --acl public-read"
+    command = "aws s3 sync ${path.module}/static s3://${aws_s3_bucket.static_site_bucket.bucket} --delete --acl public-read"
   }
 }
 
