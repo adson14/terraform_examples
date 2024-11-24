@@ -10,3 +10,4 @@ crash.log
 
 # Arquivos com variáveis sensíveis
 *.tfvars
+*kubeconfig
