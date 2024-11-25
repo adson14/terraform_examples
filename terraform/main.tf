@@ -21,8 +21,3 @@ module "newecr" {
   source = "./modules/ecr"
   prefix = var.prefix
 }
-
-module "new-s3" {
-  source      = "./modules/s3"
-  bucket_name = var.bucket_name
-}

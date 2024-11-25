@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "adson-treinamento-terraform"
-    key    = "vpc/terraform.tfstate"
+    key    = "terraform.tfstate"
     region = "us-east-1"
   }
 }
